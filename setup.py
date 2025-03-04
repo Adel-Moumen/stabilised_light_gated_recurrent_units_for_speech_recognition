@@ -10,12 +10,12 @@ setup(
                 'fast_sligru/csrc/sligru_kernel.cu',
                 'fast_sligru/csrc/rnns.cpp', 
                 'fast_sligru/csrc/ligru_kernel.cu',
-            ]
+            ],
         ),
     ],
     cmdclass={
         'build_ext': BuildExtension
-    }, 
+    },
     version="0.1.0", 
     author="Adel Moumen",
     author_email="adel.moumen@univ-avignon.fr",
