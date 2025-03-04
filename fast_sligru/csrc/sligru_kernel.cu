@@ -136,7 +136,7 @@ std::vector<torch::Tensor> sligru_cuda_cell_forward(
   auto ht = torch::empty({batch_size, hidden_size}, options);
 
   AT_DISPATCH_FLOATING_TYPES_AND_HALF(
-    wx.type(), "sligru_forward_cuda", ([&] {
+    wx.scalar_type(), "sligru_forward_cuda", ([&] {
     sligru_cuda_forward_kernel<scalar_t><<<blocks, threads>>>(
         at.packed_accessor32<scalar_t,2, torch::RestrictPtrTraits>(),
         zt.packed_accessor32<scalar_t,2, torch::RestrictPtrTraits>(),
@@ -183,7 +183,7 @@ std::vector<torch::Tensor> sligru_cuda_cell_backward(
   auto grad_dh_prev = torch::zeros({batch_size, hidden_size}, options);
 
   AT_DISPATCH_FLOATING_TYPES_AND_HALF(
-    dat.type(), "sligru_backward_cuda", ([&] {
+    dat.scalar_type(), "sligru_backward_cuda", ([&] {
     sligru_cuda_backward_kernel<scalar_t><<<blocks, threads>>>(
         grad_out.packed_accessor32<scalar_t,2, torch::RestrictPtrTraits>(),
         dh_prev.packed_accessor32<scalar_t,2, torch::RestrictPtrTraits>(),
