@@ -10,12 +10,15 @@ setup(
                 'fast_sligru/csrc/sligru_kernel.cu',
                 'fast_sligru/csrc/rnns.cpp', 
                 'fast_sligru/csrc/ligru_kernel.cu',
-            ]
+            ],
+            extra_compile_args={"cxx": ["-DPy_LIMITED_API=0x03090000"]},
+            py_limited_api=True,
         ),
     ],
     cmdclass={
         'build_ext': BuildExtension
-    }, 
+    },
+    options={"bdist_wheel": {"py_limited_api": "cp39"}},
     version="0.1.0", 
     author="Adel Moumen",
     author_email="adel.moumen@univ-avignon.fr",
@@ -28,5 +31,5 @@ setup(
     install_requires=[
         "torch",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.9",
 )
